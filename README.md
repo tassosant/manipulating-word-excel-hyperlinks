@@ -63,7 +63,7 @@ __WARNING__: Before running the script, it is always recommended to backup the f
 and you decided to change the Books to library,write as the old string the "Books"
 	* Then a text will be displayed to write the new string(write "library").
 	* It will search the words or excels under the path from popup windows and will replace the part of target of hyperlinks which target to this path.
-6. If you chose the "Edit" option in main menu ande then either chose Word or Excel
+6. If you chose the "Copy" option in main menu ande then either chose Word or Excel
 	* Two windows will popup.
 	* The first is the path to search for Words or Excels(depends on choice in 2nd 	menu). The script will search all files(word or excel) under this path which contain hyperlinks.
 	* The second will be the destination to copy the hyperlink folders and files. It will create automatically a folder which name is the word or excel with hyperlnks and then it will paste the hyperlinked folders and files in these folders.
