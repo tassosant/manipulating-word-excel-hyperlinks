@@ -25,6 +25,7 @@ A step by step series of examples that tell you how to prepare the script for ru
 	* Write: Set-Execution Policy Unrestricted.
 
 __WARNING__: Before working in the Windows Registry, it is always a good idea to back it up first, so that you have the option of restoration, should something go wrong.
+
 2. Open run(hit windows key+r)
 	* Write regedit
 	* Go to: HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\FileSystem
