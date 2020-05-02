@@ -3,7 +3,7 @@ $Error.Clear()
 Function CopyVeryLongPath([String]$Source,[string]$PathToCreate,[string]$DocumentName,[Switch]$SourceIsUNC,[Switch]$destinationIsUNC,[Switch]$IsFolder,$Destination='Destination Path'){
     $BaseSource='\\?\'
     $BaseDestination='\\?\'
-    #"SourceIsUNC:"+$SourceIsUNC
+    
     if($SourceIsUNC){
         $BaseSource='\\?\UNC\'
         $Source=$Source.Replace("\\","")                                         
@@ -60,14 +60,14 @@ function Find-Folders ([string]$Description,[switch]$IsTarget){
         {
         $loop = $false
 		
-		#Insert your script here
+		
 		
         } else
         {
             $res = [System.Windows.Forms.MessageBox]::Show("You clicked Cancel. Would you like to try again or exit?", "Select a location", [System.Windows.Forms.MessageBoxButtons]::RetryCancel)
             if($res -eq "Cancel")
             {
-                #Ends script
+                
                 return
             }
         }
@@ -120,7 +120,7 @@ Function Edit-Excel([switch]$Replace){
           } #end of For($i = 1 ; $i -le $workbook.Sheets.count ; $i++)
         }#end of  foreach($excelWorkbook in $excelWorkbooks)
         $workbook.save()
-        #if (!$Workbook.saved) { $workbook.save() }
+        
         $workbook.close()
     }#end of if($Replace)
     else{
@@ -141,16 +141,13 @@ Function Edit-Excel([switch]$Replace){
             if(($hyperlink.Address -like "*http*") -or ($hyperlink.Address -like "*www*")){
                 continue
             }
-            #$pathArray=$hyperlink.Address -split '\\' #Actually it is one '\' because it is a escape character
-            #$LastFileOrFolderOfPath=$pathArray[$pathArray.length-1] #pass the value of last folder or file of the hyperlink
-            #"Last file or directory: "+$LastFileOrFolderOfPath
+            
             $Address=$hyperlink.Address
             $IsFolder=$false
             $IsFile=$true
             if(Test-Path $hyperlink.Address -PathType Leaf){
                 $IsFolder=$false
-                # $FileName=(Get-Item -Path $hyperlink.Address).BaseName
-                #$extension=(Get-Item -Path $hyperlink.Address).Extension
+                
                 $FileName=[System.IO.Path]::GetFileNameWithoutExtension("$($hyperlink.Address)")
                 $extension=[System.IO.Path]::GetExtension("$($hyperlink.Address)")
                 $file=[System.IO.Path]::GetFileName("$($hyperlink.Address)")
@@ -160,17 +157,12 @@ Function Edit-Excel([switch]$Replace){
             elseif(Test-Path $hyperlink.Address -PathType Container){
                 $IsFolder=$true
                 $IsFile=$false
-                <#$FoldersArray=$Address.Split('\').Split('/')
-                $lastFile=$FoldersArray[$FoldersArray.Length-1]
-                if($lastFile -like "*.*"){
-                $Address="$Address\.."
-                }#>
-
+                
             }
 
             $PathInfo=[System.Uri]$hyperlink.Address;
             if($PathInfo.IsUnc){
-            #if($hyperlink -like "*\\*"){
+            
                 $SourceIsUNC=$true
             }
             else{
@@ -231,10 +223,7 @@ Function Edit-Excel([switch]$Replace){
                   for($pop=0;$pop -lt $pops;$pop++ ){
                      Pop-Location
                   }
-                 # Pop-Location
-                 # if($SecondPop){
-                  #  Pop-Location
-                  #}
+                 
 
 
                   if(test-path $source -PathType Container){
@@ -244,8 +233,7 @@ Function Edit-Excel([switch]$Replace){
                   elseif(Test-Path $source -PathType Leaf){
                     $IsFolder=$false
                     $LastDirectory=Split-Path -Path $source -Leaf -Resolve 
-                    #$file=(Get-Item -Path $destination3).BaseName
-                    #$extension=(Get-Item -Path $destination3).Extension
+                    
                     
 
                   }
@@ -269,31 +257,21 @@ Function Edit-Excel([switch]$Replace){
                     $i=0
                   }
 
-                  #########################na allakso to Document.BaseName
-
-
-                  CopyVeryLongPath -Source $source -Destination $destination2 -IsFolder:$IsFolder -PathToCreate $destination -DocumentName $workbookBaseName -SourceIsUNC:$SourceIsUNC -destinationIsUNC:$destinationIsUNC
-
-                  CopyVeryLongPath -Source $source -Destination $destination2 -IsFolder:$IsFolder -PathToCreate $destination -DocumentName $workbookBaseName -SourceIsUNC:$SourceIsUNC -destinationIsUNC:$destinationIsUNC
-
-            <#if(($IsFile)){ #checks if a hyperlink is a file
-                
-                
-                CopyVeryLongPath -Source $hyperlink.Address -FolderName $LastFileOrFolderOfPath -Destination $destination2 -SourceIsUNC:$SourceIsUNC
-            }
-            else {
-                
-                
-                CopyVeryLongPath -Source $hyperlink.Address -FolderName $LastFileOrFolderOfPath -Destination $destination2 -IsFolder -SourceIsUNC:$SourceIsUNC #-FolderName $LastFileOrFolderOfPath
-            }#>
                  
+
+
+                  CopyVeryLongPath -Source $source -Destination $destination2 -IsFolder:$IsFolder -PathToCreate $destination -DocumentName $workbookBaseName -SourceIsUNC:$SourceIsUNC -destinationIsUNC:$destinationIsUNC
+
+                  CopyVeryLongPath -Source $source -Destination $destination2 -IsFolder:$IsFolder -PathToCreate $destination -DocumentName $workbookBaseName -SourceIsUNC:$SourceIsUNC -destinationIsUNC:$destinationIsUNC
+
+            
         $hyperlink.Address=$destination2
         } #end foreach ($hyperlink in $hyperlinks)
      Pop-Location
 
      ## Save
      $workbook.save()
-        #if (!$Workbook.saved) { $workbook.save() }
+        
      $workbook.close()
 
     } #end For($i = 1 ; $i -le $workbook.Sheets.count ; $i++)
@@ -324,7 +302,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
     }
     $destinationPathInfo=[System.Uri]$destination
     if($destinationPathInfo.IsUnc){
-    #if($hyperlink -like "*\\*"){
+    
         $destinationIsUNC=$true
         }
     else{
@@ -371,7 +349,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
 
                 $PathInfo=[System.Uri]$hyperlink.Address;
                 if($PathInfo.IsUnc){
-                #if($hyperlink -like "*\\*"){
+                
                     $SourceIsUNC=$true
                 }
                 else{
@@ -388,8 +366,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
                          ######to kaname gt to push location den tha paei sosta
                         if(Test-Path $hyperlink.Address -PathType Leaf){
                             $IsFolder=$false
-                           # $FileName=(Get-Item -Path $hyperlink.Address).BaseName
-                            #$extension=(Get-Item -Path $hyperlink.Address).Extension
+                           
                             $FileName=[System.IO.Path]::GetFileNameWithoutExtension("$($hyperlink.Address)")
                             $extension=[System.IO.Path]::GetExtension("$($hyperlink.Address)")
                             $file=[System.IO.Path]::GetFileName("$($hyperlink.Address)")
@@ -399,11 +376,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
                         elseif(Test-Path $hyperlink.Address -PathType Container){
                             $IsFolder=$true
                             $IsFile=$false
-                        <#$FoldersArray=$Address.Split('\').Split('/')
-                        $lastFile=$FoldersArray[$FoldersArray.Length-1]
-                        if($lastFile -like "*.*"){
-                            $Address="$Address\.."
-                        }#>
+                       
 
                         }
                    
@@ -443,10 +416,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
 
                             }
                             else{
-                                <#if($hyperlink.Address -like "*user redirection*"){
-                                    $Address=$Address.Replace("$Root","").Replace("\\domainname\user redirection folder2`$\","").Replace("\\domainname\user redirection folder2`$\","")
-                                    $Address="$Redirection$Address"
-                                }#>
+                                
                                 $Error.Clear()
                                 $pops++
                                 Push-Location $Address | Out-Null
@@ -499,21 +469,16 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
                   for($pop=0;$pop -lt $pops;$pop++ ){
                      Pop-Location
                   }
-                 # Pop-Location
-                 # if($SecondPop){
-                  #  Pop-Location
-                  #}
-
+                 
 
                   if(test-path $source -PathType Container){
                     $IsFolder=$true
                     $folder=Split-Path -Path $source -Leaf -Resolve 
                   }
                   elseif(Test-Path $source -PathType Leaf){
-                    #$IsFolder=$false
+                    
                     $LastDirectory=Split-Path -Path $source -Leaf -Resolve 
-                    #$file=(Get-Item -Path $destination3).BaseName
-                    #$extension=(Get-Item -Path $destination3).Extension
+                    
                     
 
                   }
@@ -552,8 +517,7 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
                 $hyperlink.Address=$destination2
                
                  
-                #$hyperlink.Address=$destination+'\'+$LastFileOrFolderOfPath+$global:i
-                #$Global:i++ #>
+               
             } #end of foreach($hyperlink in $hyperlinks)
 
             
