@@ -549,17 +549,16 @@ Function Edit-Word([switch]$Both,[switch]$Replace){
 do{
     Write-Host "What do you want to do?Press a number to choose from the menu"
     Write-Host "1. Edit hyperlinks"
-    Write-Host "2. Copy the target of hyperlinks and move them to antoher directory"
-    Write-Host "3. Disable scripting execution, after that you will have to enable in order to run the script!!!!"
-    Write-Host "4. Exit"
+    Write-Host "2. Copy the target of hyperlinks and move them to antoher directory"    
+    Write-Host "3. Exit"
     [int]$loop1=Read-Host 
 
-    if(($loop1 -le 0) -or ($loop1 -ge 5)){
+    if(($loop1 -le 0) -or ($loop1 -ge 4)){
         Write-Host "Hahaha very funny"
     }
     elseif(($loop1 -eq 1) -or ($loop1 -eq 2)){
-        $Replace=$false
-        $DoSomething="to copy"
+        
+        
         do{
             
            # Write-Host 
@@ -573,22 +572,19 @@ do{
            }
             Write-Host "You selected $DoSomething the hyperlinks. Select one of the programs which contain the hyperlinks"
             Write-Host "1. Word"
-            Write-Host "2. Excel"
-            Write-Host "3. Both"
-            Write-Host "4. Exit"
+            Write-Host "2. Excel"            
+            Write-Host "3. Exit"
             [int]$loop2=Read-Host
             if($loop2 -eq 1){Edit-Word -Replace:$Replace}#word
             elseif($loop2 -eq 2){Edit-Excel -Replace:$Replace}#excel
-            elseif($loop2 -eq 3){Edit-Word -Replace:$Replace -Both}#both
-            if(($loop2 -le 0) -or ($loop2 -ge 5)){
+            
+            if(($loop2 -le 0) -or ($loop2 -ge 4)){
                 Write-Host "Applause  So funny I forgot to laugh"
             }
             $Replace=$false
-        }while($loop2 -ne 4)
+        }while($loop2 -ne 3)
     }
-    elseif($loop1 -eq 3){
-        Set-ExecutionPolicy undefined
-    }
-}while($loop1 -ne 4)
+    
+}while($loop1 -ne 3)
 
 
