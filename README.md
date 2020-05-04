@@ -1,8 +1,6 @@
 # hyperlinks
 Manipulating Office word/excel hyperlinks with powershell
- Project Title
-
-Manipulating Microsoft Office Word/Excel hyperlinks with Powershell
+ 
 
 ## Getting Started
 
