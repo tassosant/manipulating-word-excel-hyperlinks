@@ -74,5 +74,5 @@ and you decided to change the Books to library,write as the old string the "Book
 
 ## Authors
 
-* **Anastasios Antoniou** - *Initial work* - [stashs89](https://github.com/stashs89)
+* **Anastasios Antoniou** - *Initial work* - [tassosant](https://github.com/tassosant)
 
